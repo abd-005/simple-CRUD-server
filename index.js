@@ -38,8 +38,8 @@ app.get('/',(req,res)=>{
     res.send('CRUD server is Running');
 })
 
-app.listen(port,()=>{
-    console.log(`CRUD server is running on: ${port}`)
+app.listen(port, () => {
+    console.log(`Simple CRUD server is running on port ${port}`);
 })
 
 // async function run(){
