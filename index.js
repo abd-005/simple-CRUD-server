@@ -42,6 +42,19 @@ app.listen(port,()=>{
     console.log(`CRUD server is running on: ${port}`)
 })
 
+// async function run(){
+//     // await
+// }
+
+// run().catch(console.dir)
+
+// try{
+
+// }
+
+// finally{
+
+// }
 
 /*
  * 1. at least one user
