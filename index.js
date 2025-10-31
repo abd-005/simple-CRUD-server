@@ -22,6 +22,18 @@ const client = new MongoClient(uri, {
   }
 });
 
+async function run() {
+    try{
+        await client.connect();
+        await client.db('admin').command({ping:1});
+        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    }
+    finally{
+        // await client.close()
+    }
+}
+run().catch(console.dir);
+
 app.get('/',(req,res)=>{
     res.send('CRUD server is Running');
 })
@@ -35,4 +47,7 @@ app.listen(port,()=>{
  * 1. at least one user
  * 2. set uri with userId and password
  * 3. create a mongodb client
+ * 4. add a run function to connect to the database
+ * 5. use try finally inside it to connect the client
+ * 6. ping the database to see server is alive or not
 */
