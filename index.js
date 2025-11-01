@@ -26,11 +26,13 @@ async function run() {
     try{
         await client.connect();
 
-        
+        const usersDB = client.db('usersDB');
+        const userDataCollection = usersDB.collection('users');
          // add database related apis here
-        app.post('/users',(req,res)=>{
-            newUser = req.body;
-            console.log(newUser);
+        app.post('/users', async(req, res)=>{
+            const newUser = req.body;
+            const result = await userDataCollection.insertOne(newUser);
+            res.send(result);
         })
 
         await client.db('admin').command({ping:1});
@@ -63,7 +65,7 @@ app.listen(port, () => {
 // finally{
 
 // }
-
+ 
 /*
  * 1. at least one user
  * 2. set uri with userId and password
