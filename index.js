@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 // middleware
 app.use(cors());
@@ -25,6 +25,14 @@ const client = new MongoClient(uri, {
 async function run() {
     try{
         await client.connect();
+
+        
+         // add database related apis here
+        app.post('/users',(req,res)=>{
+            newUser = req.body;
+            console.log(newUser);
+        })
+
         await client.db('admin').command({ping:1});
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     }
@@ -35,7 +43,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get('/',(req,res)=>{
-    res.send('CRUD server is Running');
+    res.send('CRUD server is running');
 })
 
 app.listen(port, () => {
