@@ -28,8 +28,19 @@ async function run() {
 
         const usersDB = client.db('usersDB');
         const userDataCollection = usersDB.collection('users');
-         // add database related apis here
-        app.post('/users', async(req, res)=>{
+
+
+        // Read data from database
+        
+        app.get('/users', async (req,res)=>{
+            const cursor = userDataCollection.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
+         // add database related apis here || Create
+        
+         app.post('/users', async(req, res)=>{
             const newUser = req.body;
             const result = await userDataCollection.insertOne(newUser);
             res.send(result);
