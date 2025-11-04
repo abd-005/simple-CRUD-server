@@ -38,6 +38,16 @@ async function run() {
             res.send(result);
         })
 
+        // get specific data 
+
+        app.get('/users/:id', async (req,res)=>{
+            const id = req.params.id
+            const query = {_id: new ObjectId(id)};
+            const result = await userDataCollection.findOne(query);
+            res.send(result);
+
+        })
+
          // add database related apis here || Create
         
         //  POST 
